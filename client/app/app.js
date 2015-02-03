@@ -6,8 +6,8 @@ angular.module('theBossApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'ui.bootstrap',
-  'restangular'
+  'ui.bootstrap'
+  //,'theBossApp.NavBar'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

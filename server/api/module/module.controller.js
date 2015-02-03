@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Module = require('./module.model');
+var User = require('../user/user.model');
 
 // Get list of modules
 exports.index = function(req, res) {
@@ -17,6 +18,22 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!module) { return res.send(404); }
     return res.json(module);
+  });
+};
+
+// Get a single module
+exports.myModules = function(req, res) {
+  var userId = req.user._id;
+  User.findOne({
+    _id: userId
+  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+    if (err) return next(err);
+    if (!user) return res.json(401);
+    Module.find({owner: user.owner}, function (err, modules) {
+      if(err) { return handleError(res, err); }
+      if(!modules) { return res.send(404); }
+      return res.json(modules);
+    });
   });
 };
 
