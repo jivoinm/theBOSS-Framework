@@ -21,7 +21,7 @@ exports.show = function(req, res) {
   });
 };
 
-// Get a single module
+// Get logged in user modules
 exports.myModules = function(req, res) {
   var userId = req.user._id;
   User.findOne({
@@ -72,5 +72,6 @@ exports.destroy = function(req, res) {
 };
 
 function handleError(res, err) {
+  console.log(err);
   return res.send(500, err);
 }

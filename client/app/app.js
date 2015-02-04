@@ -7,7 +7,6 @@ angular.module('theBossApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap'
-  //,'theBossApp.NavBar'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
