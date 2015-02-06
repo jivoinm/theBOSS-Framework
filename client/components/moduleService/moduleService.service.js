@@ -8,6 +8,7 @@ angular.module('theBossApp')
     {
       myModules: {
         method: 'GET',
+        isArray: true,
         params: {
           id:'my'
         }

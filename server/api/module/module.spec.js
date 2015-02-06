@@ -22,7 +22,7 @@ describe('GET /api/modules', function() {
 
 describe('GET /api/modules/my', function() {
   var auth = {};
-  beforeEach(function (done) {
+  before(function (done) {
     // Clear modules before testing
     Module.remove().exec().then(function() {
       Module.create({

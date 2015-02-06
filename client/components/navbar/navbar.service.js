@@ -19,7 +19,7 @@ angular.module('theBossApp')
             function(err) {
               deferred.reject(err);
               return cb(err);
-            }.bind(this));
+            });
         }
         return deferred.promise;
       }

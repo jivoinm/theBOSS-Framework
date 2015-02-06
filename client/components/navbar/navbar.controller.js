@@ -1,16 +1,21 @@
 'use strict';
 
 angular.module('theBossApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, navbarSrv) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
     }];
-
+    $scope.modules = [];
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
+
+    //Load user's modules
+    navbarSrv.getLoggedUserModules().then(function(modules) {
+      $scope.modules = modules;
+    });
 
     $scope.logout = function() {
       Auth.logout();
