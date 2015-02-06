@@ -22,10 +22,12 @@ angular.module('theBossApp')
 
         $http.post('/auth/local', {
           email: user.email,
-          password: user.password
+          password: user.password,
+          owner: user.owner
         }).
         success(function(data) {
           $cookieStore.put('token', data.token);
+          $cookieStore.put('owner', data.owner);
           currentUser = User.get();
           deferred.resolve(data);
           return cb();
@@ -46,6 +48,7 @@ angular.module('theBossApp')
        */
       logout: function() {
         $cookieStore.remove('token');
+        $cookieStore.remove('owner');
         currentUser = {};
       },
 

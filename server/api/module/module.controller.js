@@ -29,7 +29,7 @@ exports.myModules = function(req, res) {
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
-    Module.find({owner: user.owner}, function (err, modules) {
+    Module.find({owner: new RegExp(user.owner,"i"), roles: {$in: [user.role]}}, function (err, modules) {
       if(err) { return handleError(res, err); }
       if(!modules) { return res.send(404); }
       return res.json(modules);

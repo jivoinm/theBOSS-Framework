@@ -8,6 +8,7 @@ var ModuleSchema = new Schema({
   info: String,
   active: Boolean,
   owner: String,
+  roles: [String],
   _forms: [{type: Schema.Types.ObjectId, ref: 'Form'}]
 });
 

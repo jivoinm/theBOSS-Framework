@@ -24,6 +24,11 @@ angular.module('theBossApp', [
         if ($cookieStore.get('token')) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
         }
+
+        if ($cookieStore.get('owner')) {
+          config.headers.owner = $cookieStore.get('owner');
+        }
+
         return config;
       },
 
