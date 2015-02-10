@@ -17,6 +17,12 @@ angular.module('theBossApp')
       $scope.modules = modules;
     });
 
+    $scope.loadForm = function (module, formId) {
+      navbarSrv.getForm(module, formId).then(function (form) {
+        $scope.form = form;
+      });
+    };
+
     $scope.logout = function() {
       Auth.logout();
       $location.path('/login');

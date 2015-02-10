@@ -22,6 +22,27 @@ angular.module('theBossApp')
             });
         }
         return deferred.promise;
-      }
+      },
+
+    getForms: function (module) {
+      var deferred = $q.defer();
+      module.form(function(forms) {
+        deferred.resolve(forms);
+      }, function (err) {
+        deferred.reject(err);
+      });
+      return deferred.promise;
+    },
+
+    getForm: function (module, formId) {
+      var deferred = $q.defer();
+      module.form({formid: formId}, function(form) {
+        deferred.resolve(form);
+      }, function (err) {
+        deferred.reject(err);
+      });
+      return deferred.promise;
+    }
+
     };
   });

@@ -20,17 +20,29 @@ describe('Controller: NavbarCtrl', function () {
     });
     inject( function ($q) {
       mockNavbarSrv.data = [
-      {_id: 0, name: 'Module1'},
-      {_id: 1, name: 'Module2'},
-      {_id: 2, name: 'Module3'},
-      {_id: 3, name: 'Module4'},
+      {_id: 0, name: 'Module1', _forms: [{_id: 'form1'}, {_id: 'form2'}]},
+      {_id: 1, name: 'Module2', _forms: [{_id: 'form1'}, {_id: 'form2'}]},
+      {_id: 2, name: 'Module3', _forms: [{_id: 'form1'}, {_id: 'form2'}]},
+      {_id: 3, name: 'Module4', _forms: [{_id: 'form1'}, {_id: 'form2'}]},
       ];
+
+      mockNavbarSrv.forms = [{_id: 'form1', name: 'Form 1'}, {_id: 'form2', name: 'Form 2'}];
 
       mockNavbarSrv.getLoggedUserModules = function(){
         var defer = $q.defer();
         defer.resolve(this.data);
         return defer.promise;
       };
+      mockNavbarSrv.getForms = function() {
+        var defer = $q.defer();
+        defer.resolve(this.forms);
+        return defer.promise;
+      }
+      mockNavbarSrv.getForm = function(module, formId) {
+        var defer = $q.defer();
+        defer.resolve(this.forms[0]);
+        return defer.promise;
+      }
     })
   });
 
@@ -51,5 +63,11 @@ describe('Controller: NavbarCtrl', function () {
 
   it('should attach a list of modules to the scope', function () {
     expect(scope.modules.length).toBe(4);
+  });
+
+  it("should attach module form to the scope when selected", function () {
+    scope.loadForm(scope.modules[0], scope.modules[0]._forms[0]._id);
+    scope.$digest();
+    expect(scope.form).toBeDefined();
   });
 });

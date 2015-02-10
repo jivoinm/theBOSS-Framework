@@ -12,6 +12,22 @@ angular.module('theBossApp')
         params: {
           id:'my'
         }
-      }
+      },
+     forms: {
+       method: 'GET',
+       isArray: true,
+       params: {
+         id:'_id',
+         controller: 'form'
+       }
+     },
+     form: {
+       method: 'GET',
+       params: {
+         id:'@_id',
+         controller: 'form',
+         formid: 'formid'
+       }
+     }
 	  });
   });
