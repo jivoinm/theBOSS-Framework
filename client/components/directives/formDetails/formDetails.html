@@ -1,0 +1,24 @@
+<div class="col-md-4" ng-if="formValue._id">
+  <div class="box box-solid">
+    <div class="box-header with-border">
+      <h3 class="box-title">Selected details {{form.name}}</h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+      <div ng-repeat="section in form.sections">
+        <p class="text-muted">{{section.name}}</p>
+        <dl class="dl-horizontal" ng-repeat="field in section.fields">
+          <dt>{{field.title}}</dt>
+          <dd>{{formValue.sections[section.key][field.key].value}}</dd>
+        </dl>
+      </div>
+      <div class="well well-sm">
+          <div class="row">
+            <div class="col-xs-12">
+                  <a ui-sref="forms.edit({valueId: formValue._id})" class="btn btn-success pull-left"><i class="fa fa-edit"></i> Edit</a>
+                  <a class="btn btn-danger pull-right"><i class="fa fa-recycle"></i> Delete</a>
+                </div>
+          </div>
+       </div>
+    </div><!-- /.box-body -->
+  </div><!-- /.box -->
+</div>

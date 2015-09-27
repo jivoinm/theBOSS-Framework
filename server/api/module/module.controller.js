@@ -27,12 +27,12 @@ exports.myModules = function(req, res) {
   User.findOne({
     _id: userId
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
-    if (err) return next(err);
+    if(err) { return handleError(res, err); }
     if (!user) return res.json(401);
     Module.find({owner: new RegExp(user.owner,"i"), roles: {$in: [user.role]}}, function (err, modules) {
       if(err) { return handleError(res, err); }
       if(!modules) { return res.send(404); }
-      return res.json(modules);
+      return res.json({modules: modules});
     });
   });
 };

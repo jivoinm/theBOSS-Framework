@@ -12,8 +12,8 @@ angular.module('theBossApp')
           deferred.resolve(modules);
         } else{
           moduleService.myModules(function(data) {
-              $cookieStore.put('modules', data);
-              deferred.resolve(data);
+              //$cookieStore.put('modules', data.modules);
+              deferred.resolve(data.modules);
               return cb();
             },
             function(err) {
@@ -26,7 +26,7 @@ angular.module('theBossApp')
 
     getForms: function (module) {
       var deferred = $q.defer();
-      module.form(function(forms) {
+      module.$forms({},function(forms) {
         deferred.resolve(forms);
       }, function (err) {
         deferred.reject(err);
@@ -36,7 +36,7 @@ angular.module('theBossApp')
 
     getForm: function (module, formId) {
       var deferred = $q.defer();
-      module.form({formid: formId}, function(form) {
+      module.$form({_id: formId}, function(form) {
         deferred.resolve(form);
       }, function (err) {
         deferred.reject(err);

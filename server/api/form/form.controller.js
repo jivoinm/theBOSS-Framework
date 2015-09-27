@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Form = require('./form.model');
+var Value = require('../value/value.model');
 
 // Get list of forms
 exports.index = function(req, res) {
@@ -17,6 +18,34 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!form) { return res.send(404); }
     return res.json(form);
+  });
+};
+// Get form values
+exports.loadFormValues = function(req, res) {
+  var page = req.query.page || 1;
+  var limit = req.query.limit || 25;
+  var queryObject = {'_form.formId': req.params.id};
+  var query = Value.find(queryObject);
+  if(req.query.sort){
+    query.sort(req.query.sort);
+  }
+  
+  query.skip((page * limit) - limit);
+  query.limit(limit);
+
+  query.exec(function (err, values) {
+    if(err) { return handleError(res, err); }
+    if(!values) { return res.send(404); }
+    Form.findById(req.params.id, function(err,form){
+      Value.count(queryObject, function(err, count){
+        return res.json({
+            result: values,
+            form: form,
+            page: page,
+            total: count
+        });
+      });
+    });
   });
 };
 

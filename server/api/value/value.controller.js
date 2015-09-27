@@ -30,16 +30,27 @@ exports.create = function(req, res) {
 
 // Updates an existing value in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Value.findById(req.params.id, function (err, value) {
+
+  // if(req.body._id) {
+  //   var id = req.body._id;
+  //   delete req.body._id;
+  //   Value.update({_id: id}, req.body, {upsert: true}, function(err, nrRecords, rawRecord){
+  //     if (err) { return handleError(res, err); }
+  //     Value.findById(req.params.id, function (err, value) {
+  //       if(err) { return handleError(res, err); }
+  //       if(!value) { return res.send(404); }
+  //       return res.json(value);
+  //     });
+  //   });
+  // }
+  delete req.body._id;
+  delete req.body.__v;
+
+  Value.update({_id:req.params.id}, { $set: { sections: req.body.sections }}, {upsert: true}, function (err, value) {
     if (err) { return handleError(res, err); }
     if(!value) { return res.send(404); }
-    var updated = _.merge(value, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
       return res.json(200, value);
     });
-  });
 };
 
 // Deletes a value from the DB.

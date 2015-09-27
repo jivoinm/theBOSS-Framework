@@ -7,15 +7,15 @@ angular.module('theBossApp')
 
     $scope.register = function(form) {
       $scope.submitted = true;
-
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
           email: $scope.user.email,
-          password: $scope.user.password
+          password: $scope.user.password,
+          owner: $scope.user.owner
         })
         .then( function() {
-          // Account created, redirect to home
+          // Account created, redirect to 
           $location.path('/');
         })
         .catch( function(err) {

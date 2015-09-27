@@ -13,9 +13,10 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-      <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <!-- endbower -->
+      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="assets/css/AdminLTE.css" />
+      <link rel="stylesheet" href="assets/css/skins/skin-blue.min.css" />
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
@@ -23,18 +24,31 @@
       <link rel="stylesheet" href="app/account/login/login.css">
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/forms/form/forms.css">
       <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="components/directives/formDetails/formDetails.css">
+      <link rel="stylesheet" href="components/directives/tbListItem/tbListItem.css">
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="theBossApp">
+  <body ng-app="theBossApp" class="skin-blue sidebar-mini">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+    <div ui-view="" class="wrapper"></div>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <!-- To the right -->
+      <div class="pull-right hidden-xs">
+        Anything you want
+      </div>
+      <!-- Default to the left -->
+      <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+    </footer>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -64,6 +78,9 @@
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
+      <script src="bower_components/math.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="bower_components/adminlte/dist/js/app.js"></script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
@@ -75,17 +92,26 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
+          <script src="app/forms/form/forms.controller.js"></script>
+          <script src="app/forms/forms.js"></script>
+          <script src="app/forms/list/forms.list.controller.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
+          <script src="components/directives/field/field.directive.js"></script>
+          <script src="components/directives/formDetails/formDetails.directive.js"></script>
+          <script src="components/directives/tbListItem/tbListItem.directive.js"></script>
+          <script src="components/forms/forms.service.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/moduleService/moduleService.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <script src="components/navbar/navbar.service.js"></script>
           <script src="components/socket/socket.service.js"></script>
+          <script src="components/value/value.service.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
+
 </body>
 </html>

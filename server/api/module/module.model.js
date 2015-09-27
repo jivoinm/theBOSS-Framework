@@ -9,7 +9,12 @@ var ModuleSchema = new Schema({
   active: Boolean,
   owner: String,
   roles: [String],
-  _forms: [{type: Schema.Types.ObjectId, ref: 'Form'}]
+  _forms: [
+    {
+      formId: {type: Schema.Types.ObjectId, ref: 'Form'},
+      name: String
+    }
+    ]
 });
 
 /**
@@ -30,5 +35,10 @@ ModuleSchema
     return owner.length;
   }, 'Owner cannot be blank');
 
+ModuleSchema
+  .virtual('hasForms')
+  .get(function() {
+    return this._forms.length > 0;
+  });
 
 module.exports = mongoose.model('Module', ModuleSchema);

@@ -25,12 +25,7 @@ describe('Form Model', function() {
     });
   });
 
-  it('should begin with no forms', function(done) {
-    Form.find({}, function(err, forms) {
-      forms.should.have.length(0);
-      done();
-    });
-  });
+
 
   it('should fail when saving a duplicate form', function(done) {
     form.save(function() {
@@ -79,7 +74,7 @@ describe('Form Model with fields', function() {
           }
       };
 
-      done();           
+      done();
     });
   });
 
@@ -87,13 +82,13 @@ describe('Form Model with fields', function() {
     Form.remove().exec().then(function() {
       done();
     });
-  });  
+  });
 
   it('should save sections', function (done) {
     form.save(function (err, savedForm) {
       should.not.exist(err);
       should.exist(savedForm.sections['Section 1']);
-      done();  
+      done();
     });
   });
 
@@ -102,7 +97,7 @@ describe('Form Model with fields', function() {
     form.save(function (err, savedForm) {
       should.not.exist(err);
       savedForm.sections['Section 1']['Field 1'].type.should.be.equal('Select');
-      done();  
+      done();
     });
   });
 });

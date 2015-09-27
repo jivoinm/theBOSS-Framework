@@ -10,12 +10,25 @@ angular.module('theBossApp')
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.currentUser = Auth.getCurrentUser();
 
     //Load user's modules
     navbarSrv.getLoggedUserModules().then(function(modules) {
+
+      angular.forEach(modules, function(module, i){
+        module.expanded = false;
+        module._forms = module._forms;
+      });
       $scope.modules = modules;
     });
+
+    $scope.hasForms = function(item){
+      return item._forms.length > 0;
+    };
+
+    $scope.moduleForms = function(item){
+      return item._forms;
+    };
 
     $scope.loadForm = function (module, formId) {
       navbarSrv.getForm(module, formId).then(function (form) {
@@ -31,4 +44,5 @@ angular.module('theBossApp')
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+
   });

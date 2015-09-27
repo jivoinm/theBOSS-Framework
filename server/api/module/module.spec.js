@@ -46,7 +46,7 @@ describe('GET /api/modules/my', function() {
   describe("Admin operations", function () {
     before(loginUser(auth, 'admin@admin.com', 'admin', 'owner1'));
 
-    it('should respond with JSON array queried by owner', function(done) {
+    it('should respond with JSON queried by owner', function(done) {
       request
           .get('/api/modules/my')
           .set('Authorization', 'bearer ' + auth.token)
@@ -55,8 +55,8 @@ describe('GET /api/modules/my', function() {
           .expect('Content-Type', /json/)
           .end(function(err, res) {
               if (err) return done(err);
-              res.body.should.be.instanceof(Array);
-              res.body.length.should.equal(1);
+              res.body.modules.should.be.instanceof(Array);
+              res.body.modules.length.should.equal(1);
               done();
           });
     });
@@ -74,8 +74,8 @@ describe('GET /api/modules/my', function() {
             .expect('Content-Type', /json/)
             .end(function(err, res) {
                 if (err) return done(err);
-                res.body.should.be.instanceof(Array);
-                res.body.length.should.equal(0);
+                res.body.modules.should.be.instanceof(Array);
+                res.body.modules.length.should.equal(0);
                 done();
             });
     });

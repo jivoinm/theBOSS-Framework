@@ -2,31 +2,30 @@
 
 angular.module('theBossApp')
   .service('moduleService', function ($resource) {
-    return $resource('/api/modules/:id/:controller', {
-      id: '@_id'
+    return $resource('/api/modules/:listController:id/:docController', {
+      id: '@_id',
+      listController: '@listController',
+      docController: '@docController'
     },
     {
       myModules: {
         method: 'GET',
-        isArray: true,
         params: {
-          id:'my'
+          listController:'my'
         }
       },
      forms: {
        method: 'GET',
-       isArray: true,
        params: {
-         id:'_id',
-         controller: 'form'
+         id:'@_id',
+         docController: 'forms'
        }
      },
      form: {
        method: 'GET',
        params: {
          id:'@_id',
-         controller: 'form',
-         formid: 'formid'
+         docController: 'forms'
        }
      }
 	  });

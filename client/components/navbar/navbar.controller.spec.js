@@ -37,19 +37,19 @@ describe('Controller: NavbarCtrl', function () {
         var defer = $q.defer();
         defer.resolve(this.forms);
         return defer.promise;
-      }
-      mockNavbarSrv.getForm = function(module, formId) {
+      };
+      mockNavbarSrv.getForm = function() {
         var defer = $q.defer();
         defer.resolve(this.forms[0]);
         return defer.promise;
-      }
-    })
+      };
+    });
   });
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, _$location_, _Auth_, _navbarSrv_) {
     Auth = _Auth_;
-    $location - _$location_;
+    $location = _$location_;
     scope = $rootScope.$new();
     navbarSrv = _navbarSrv_;
     NavbarCtrl = $controller('NavbarCtrl', {
@@ -65,7 +65,7 @@ describe('Controller: NavbarCtrl', function () {
     expect(scope.modules.length).toBe(4);
   });
 
-  it("should attach module form to the scope when selected", function () {
+  it('should attach module form to the scope when selected', function () {
     scope.loadForm(scope.modules[0], scope.modules[0]._forms[0]._id);
     scope.$digest();
     expect(scope.form).toBeDefined();

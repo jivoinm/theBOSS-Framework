@@ -7,8 +7,15 @@ var FormSchema = new Schema({
   name: String,
   info: String,
   active: Boolean,
-  _module: {type: Schema.Types.ObjectId, ref: 'Module'},
-  sections: Schema.Types.Mixed
+  _module: {
+    moduleId: {type: Schema.Types.ObjectId, ref: 'Module'},
+    name: String
+  },
+  sections: Schema.Types.Mixed,
+  listItems: [{
+    name: String,
+    key: String
+  }]
 });
 
 /**

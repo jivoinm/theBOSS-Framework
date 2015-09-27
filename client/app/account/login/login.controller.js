@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('theBossApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $window, $stateParams) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -11,7 +11,8 @@ angular.module('theBossApp')
       if(form.$valid) {
         Auth.login({
           email: $scope.user.email,
-          password: $scope.user.password
+          password: $scope.user.password,
+          owner: $stateParams.owner
         })
         .then( function() {
           // Logged in, redirect to home

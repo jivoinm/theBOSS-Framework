@@ -1,0 +1,23 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      {{form.name}}
+      <small>{{form.info}}</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> {{form._module.name}}</a></li>
+      <li class="active">Here</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <ui-view>
+    </ui-view>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->

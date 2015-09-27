@@ -1,0 +1,94 @@
+ <div class="row">
+   <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-aqua">
+        <div class="inner">
+          <h3>150</h3>
+          <p>New Orders</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3>53<sup style="font-size: 20px">%</sup></h3>
+          <p>Bounce Rate</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-yellow">
+        <div class="inner">
+          <h3>44</h3>
+          <p>User Registrations</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <h3>65</h3>
+          <p>Unique Visitors</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div><!-- ./col -->
+</div>
+<div class="row">
+  <div ng-class="{'col-md-8': selectedValue._id, 'col-md-12': !selectedValue._id}">
+  <div class="box">
+   <div class="box-header">
+      <h3 class="box-title">Select item in list to see details</h3>
+      <div class="box-tools">
+        <div class="input-group">
+          <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+          <div class="input-group-btn">
+            <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+      <table class="table table-hover">
+        <tbody>
+        <tr>
+
+          <th ng-repeat="listItem in form.listItems">{{listItem.name}}</th>
+
+        </tr>
+
+        <tr ng-repeat="val in formValue.result" ng-click="itemDetails(val)" ng-class="{'bg-light-blue-active': selectedValue._id===val._id}">
+          <td ng-repeat="listItem in form.listItems">
+            <tb-list-item list-item="listItem" list-item-value="val"></tb-list-item>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div><!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <pagination ng-model="currentPage" total-items="totalRecords" page="currentPage" max-size="maxSize" class="pagination pagination-sm no-margin pull-right" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+    </div>
+  </div>
+</div>
+
+<form-details form-value="selectedValue" form="form"></form-details>
+</div>
