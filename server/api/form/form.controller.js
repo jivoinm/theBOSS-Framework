@@ -26,10 +26,10 @@ exports.loadFormValues = function(req, res) {
   var limit = req.query.limit || 25;
   var queryObject = {'_form.formId': req.params.id};
   var query = Value.find(queryObject);
-  if(req.query.sort){
-    query.sort(req.query.sort);
-  }
-  
+
+  query.sort({_lastUpdated: -1});
+
+
   query.skip((page * limit) - limit);
   query.limit(limit);
 

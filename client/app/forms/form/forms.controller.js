@@ -20,7 +20,6 @@ angular.module('theBossApp')
         if($scope.model.$save){
           //update
           $scope.model.$save(function(value){
-            console.log(value);
             $scope.model = value;
           });
         }else{

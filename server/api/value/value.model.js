@@ -10,7 +10,17 @@ var ValueSchema = new Schema({
     info: String
   },
   active: Boolean,
+  _createdAt: Date,
+  _lastUpdated: Date,
   sections: Schema.Types.Mixed
 });
 
+ValueSchema.pre('save', function(next){
+  var now = new Date();
+  this._lastUpdated = now;
+  if ( !this._createdAt ) {
+    this._createdAt = now;
+  }
+  next();
+});
 module.exports = mongoose.model('Value', ValueSchema);

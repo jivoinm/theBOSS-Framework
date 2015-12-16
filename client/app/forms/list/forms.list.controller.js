@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('theBossApp')
-  .controller('FormsListCtrl', function ($scope,forms, $stateParams) {
+  .controller('FormsListCtrl', function ($scope, forms, $stateParams) {
     $scope.selectedValue = {};
     $scope.form = {};
     $scope.totalRecords = 0;

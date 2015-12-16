@@ -22,7 +22,7 @@ describe('Directive: field', function () {
     }
   }));
 
-  var getField = function(title, type, defaultValue, options, format){
+  var getField = function(title, type, defaultValue, options, prefix){
     return {
       title: title,
       key: title.toLowerCase().replace(' ','_').replace('.','_'),
@@ -30,7 +30,7 @@ describe('Directive: field', function () {
       options: options,
       defaultValue: defaultValue,
       require: true,
-      format: format,
+      prefix: prefix,
       position: 0
     };
   };
@@ -58,7 +58,7 @@ describe('Directive: field', function () {
     expect(scope.model.field).not.toBeUndefined();
   });
 
-  it('should calculate field value', function () {
+  it('should calculate field value on add', function () {
     scope.field = getField('Input Box', 'formula', '0', '=sections.section_1.field_1_1+sections.section_1.field_1_2');
     scope.model = {
       sections: {
@@ -74,15 +74,14 @@ describe('Directive: field', function () {
     };
     element = angular.element('<field ng-model="model.sections[section_1][field_1_3]" ng-field="field" form-value="model"></field>');
     element = $compile(element)(scope);
-    console.log(scope.model);
     changeInputField('test');
     var input = element.find('[name=fieldName]')[0];
-    expect(input.innerText).toBe('3');
+    expect(input.value).toBe('3');
 
   });
 
-  it('should format calculated result', function () {
-    scope.field = getField('Input Box', 'formula', '0', '=sections.section_1.field_1_1+sections.section_1.field_1_2', 'formatted {{model.value}}');
+  it('should calculate field value on extract', function () {
+    scope.field = getField('Input Box', 'formula', '0', '=sections.section_1.field_1_2-sections.section_1.field_1_1');
     scope.model = {
       sections: {
         section_1: {
@@ -99,7 +98,94 @@ describe('Directive: field', function () {
     element = $compile(element)(scope);
     changeInputField('test');
     var input = element.find('[name=fieldName]')[0];
-    expect(input.innerText).toBe('formatted 3');
+    expect(input.value).toBe('1');
+
+  });
+  it('should calculate field value on multiply', function () {
+    scope.field = getField('Input Box', 'formula', '0', '=sections.section_1.field_1_2*sections.section_1.field_1_1');
+    scope.model = {
+      sections: {
+        section_1: {
+          field_1_1 : {
+            value: 2
+          },
+          field_1_2: {
+            value: 2
+          }
+        }
+      }
+    };
+    element = angular.element('<field ng-model="model.sections[section_1][field_1_3]" ng-field="field" form-value="model"></field>');
+    element = $compile(element)(scope);
+    changeInputField('test');
+    var input = element.find('[name=fieldName]')[0];
+    expect(input.value).toBe('4');
+
+  });
+
+  it('should calculate field value on div', function () {
+    scope.field = getField('Input Box', 'formula', '0', '=sections.section_1.field_1_2/sections.section_1.field_1_1');
+    scope.model = {
+      sections: {
+        section_1: {
+          field_1_1 : {
+            value: 2
+          },
+          field_1_2: {
+            value: 2
+          }
+        }
+      }
+    };
+    element = angular.element('<field ng-model="model.sections[section_1][field_1_3]" ng-field="field" form-value="model"></field>');
+    element = $compile(element)(scope);
+    changeInputField('test');
+    var input = element.find('[name=fieldName]')[0];
+    expect(input.value).toBe('1');
+
+  });
+
+  it('should calculate field value on multiple opertiors', function () {
+    scope.field = getField('Input Box', 'formula', '0', '=(sections.section_1.field_1_2 * 2)/sections.section_1.field_1_1');
+    scope.model = {
+      sections: {
+        section_1: {
+          field_1_1 : {
+            value: 5
+          },
+          field_1_2: {
+            value: 5
+          }
+        }
+      }
+    };
+    element = angular.element('<field ng-model="model.sections[section_1][field_1_3]" ng-field="field" form-value="model"></field>');
+    element = $compile(element)(scope);
+    changeInputField('test');
+    var input = element.find('[name=fieldName]')[0];
+    expect(input.value).toBe('2');
+
+  });
+
+  it('should add prefix to calculated result', function () {
+    scope.field = getField('Input Box', 'formula', '0', '=sections.section_1.field_1_1+sections.section_1.field_1_2', 'm2');
+    scope.model = {
+      sections: {
+        section_1: {
+          field_1_1 : {
+            value: 1
+          },
+          field_1_2: {
+            value: 2
+          }
+        }
+      }
+    };
+    element = angular.element('<field ng-model="model.sections[section_1][field_1_3]" ng-field="field" form-value="model"></field>');
+    element = $compile(element)(scope);
+    changeInputField('test');
+    var inputAddon = element.find('.input-group-addon')[0];
+    expect(inputAddon.innerText).toBe('m2');
   });
 
 });

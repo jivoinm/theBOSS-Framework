@@ -17,6 +17,7 @@ angular.module('theBossApp')
 
           var processed = false;
           angular.forEach(formulas, function(formula){
+            formula = formula.replace('(','').replace(')','');
             var getProperty = $parse(formula);
             var value = getProperty(listItemValue);
             if(value && value.value != null){
@@ -45,7 +46,6 @@ angular.module('theBossApp')
           }else{
             var getter = $parse(fn);
             value = getter(formValue).value;
-            //console.log(value);
           }
           scope.model.value = value;
         };

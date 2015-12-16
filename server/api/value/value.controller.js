@@ -46,7 +46,7 @@ exports.update = function(req, res) {
   delete req.body._id;
   delete req.body.__v;
 
-  Value.update({_id:req.params.id}, { $set: { sections: req.body.sections }}, {upsert: true}, function (err, value) {
+  Value.update({_id:req.params.id}, { $set: { _lastUpdated: new Date(), sections: req.body.sections }}, {upsert: true}, function (err, value) {
     if (err) { return handleError(res, err); }
     if(!value) { return res.send(404); }
       return res.json(200, value);

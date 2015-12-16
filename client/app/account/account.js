@@ -16,7 +16,8 @@ angular.module('theBossApp')
       .state('signup', {
         url: '/signup',
         templateUrl: 'app/account/signup/signup.html',
-        controller: 'SignupCtrl'
+        controller: 'SignupCtrl',
+        authenticate: false
       })
       .state('settings', {
         url: '/settings',
